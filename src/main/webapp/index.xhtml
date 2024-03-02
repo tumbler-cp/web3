@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:p="http://primefaces.org/ui"
+    >
+    <h:head>
+        <title>Главная Лаб №3</title>
+        <h:outputStylesheet name="stylesheet/index.css"/>
+    </h:head>
+    <h:body>
+        <h:panelGroup styleClass="clock-panel">
+            <h:outputText>Ходжаев Абдужалол Абдужаборович / Вариант №5799</h:outputText>
+            <h:form>
+                <p:poll interval="10" update="clock"/>
+                <h:outputText id="clock" value="#{clock.time}" styleClass="clock"/>
+            </h:form>
+            <h:button value="Форма" outcome="goto-app"/>
+        </h:panelGroup>
+    </h:body>
+</html>

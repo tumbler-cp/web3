@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+>
+
+<h:head>
+	<title>JSF LAB</title>
+	<h:outputStylesheet name="stylesheet/index.css"/>
+</h:head>
+
+<h:body styleClass="body">
+	<h:panelGroup styleClass="app">
+		<h:panelGroup styleClass="left">
+			<h:outputText>Ходжаев Абдужалол Абдужаборович / Вариант №5799</h:outputText>
+			<h:form styleClass="form">
+				<h:outputLabel for="number-x">X: </h:outputLabel>
+				<p:inputText id="number-x" value="#{point.x}"/>
+				<p:slider for="number-x" minValue="-5" maxValue="5" step="1" value="#{point.x}" range="max"/>
+				<h:outputLabel for="number-y">Y: </h:outputLabel>
+				<p:inputNumber id="number-y" value="#{point.y}" decimalSeparator=".">
+					<f:validateDoubleRange minimum="-5" maximum="3"/>
+				</p:inputNumber>
+				<h:outputLabel for="r">R: </h:outputLabel>
+				<p:selectOneRadio id="r" value="#{point.r}">
+    				<f:selectItem itemLabel="1" itemValue="1" />
+    				<f:selectItem itemLabel="2" itemValue="2" />
+    				<f:selectItem itemLabel="3" itemValue="3" />
+    				<f:selectItem itemLabel="4" itemValue="4" />
+    				<f:selectItem itemLabel="5" itemValue="5" />
+				</p:selectOneRadio>
+				<h:commandButton ajax="true" value="Отправить" styleClass="submitButton" actionListener="#{database.addPoint(point)}" update="table"/>
+			</h:form>
+			<h:button value="Главная" outcome="goto-index"/>
+		</h:panelGroup>
+		<h:panelGroup styleClass="right">
+			<h:panelGroup styleClass="image" id="img">
+				<h:panelGroup styleClass="svg">
+					<svg id="svg" width="250" height="250">
+						<!-- ФИГУРЫ -->
+						<polygon points="25,25 125,25 125,125 25,125" fill="#fe640b" stroke="none" opacity="1"></polygon>
+						<polygon points="125,125 125,225 175,125" fill="#fe640b" stroke="none" opacity="1"></polygon>
+						<path d="M125,125 L125,25 A100,100 0 0,1 225,125 Z" fill="#fe640b" stroke="none" opacity="1"></path>
+						
+						<!-- ЛИНИИ -->
+						<line stroke="black" x1="125" x2="125" y1="0" y2="250"></line>
+						<line stroke="black" x1="0" x2="250" y1="125" y2="125"></line>
+						
+						<!-- ОТМЕТКИ -->
+						<line stroke="black" x1="25" x2="25" y1="123" y2="127"></line>
+						<line stroke="black" x1="75" x2="75" y1="123" y2="127"></line>
+						<line stroke="black" x1="175" x2="175" y1="123" y2="127"></line>
+						<line stroke="black" x1="225" x2="225" y1="123" y2="127"></line>
+						
+						<line stroke="black" x1="123" x2="127" y1="25" y2="25"></line>
+						<line stroke="black" x1="123" x2="127" y1="75" y2="75"></line>
+						<line stroke="black" x1="123" x2="127" y1="175" y2="175"></line>
+						<line stroke="black" x1="123" x2="127" y1="225" y2="225"></line>
+						
+						<!-- СТРЕЛКИ -->
+						<polygon points="125,0 120,10 130,10"></polygon>
+						<polygon points="250,125 240,120 240,130"></polygon>
+						
+						<!-- ПОДПИСЬ -->
+						<text x="25" y="120" fill="black">-R</text>
+						<text x="75" y="120" fill="black">-R/2</text>
+						<text x="175" y="120" fill="black">R/2</text>
+						<text x="225" y="120" fill="black">R</text>
+						
+						<text x="130" y="25" fill="black">R</text>
+						<text x="130" y="75" fill="black">R/2</text>
+						<text x="130" y="175" fill="black">-R/2</text>
+						<text x="130" y="225" fill="black">-R</text>
+					</svg>
+					<h:outputScript name="a.js" library="build" type="module"/>
+					<h:outputScript name="scripts/point.js"/>
+					<h:outputScript id="drawPoints">
+						fillList('#{database.jsonPoints}');
+						drawAll();
+					</h:outputScript>
+				</h:panelGroup>
+			</h:panelGroup>
+			<h:panelGroup styleClass="table-capsule">
+				
+				<p:dataTable id="table" styleClass="table" var="pnt" value="#{pointList}">
+					<p:column headerText="X">
+						<h:outputText value="#{pnt.x}"/>
+					</p:column>
+					<p:column headerText="Y">
+						<h:outputText value="#{pnt.y}"/>
+					</p:column>
+					<p:column headerText="R">
+						<h:outputText value="#{pnt.r}"/>
+					</p:column>
+					<p:column headerText="HIT">
+						<h:outputText value="#{pnt.hit}"/>
+					</p:column>
+				</p:dataTable>
+			</h:panelGroup>
+		</h:panelGroup>
+	</h:panelGroup>
+</h:body>
+<p:remoteCommand name="addAttempt" action="#{database.addPoint(point.r)}" update="table drawPoints" process="@this"/>
+</html>

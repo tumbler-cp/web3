@@ -1,0 +1,124 @@
+body {
+    font-family: 'Lucida Console', sans-serif, monospace;
+}
+
+.body {
+    padding: 0;
+    margin: 0;
+}
+
+.app {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+.left {
+    background: #333;
+    color: #eee;
+    min-width: 30%;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.left input {
+    color: #333;
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    align-content: center;
+}
+
+.image {
+    padding: 50px;
+}
+
+.table-capsule {
+    background: #555;
+    padding: 50px;
+    height: 100%;
+    overflow: scroll;
+}
+
+.table-capsule table {
+    padding: 20px;
+    color: white;
+    width: 100%;
+}
+
+.table tr {
+    padding: 20px;
+    background-color: orangered;
+}
+
+.table td {
+    padding: 20px;
+    text-align: center;
+}
+
+.table tr:nth-child(even) {
+    color: black;
+    background-color: white;
+}
+
+.form input {
+    width: 100%
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+}
+
+.svg {
+    display: flex;
+    justify-content: center;
+}
+
+input[type="button"],
+.submitButton {
+    transition-duration: 0.1s;
+    margin: 20px auto;
+    border: none;
+    outline: none;
+    font-size: medium;
+    padding: 20px;
+    padding-left: 40px;
+    padding-right: 40px;
+    color: #333;
+    border-radius: 15px;
+}
+
+td[value="true"] {
+    background: lawngreen;
+    color: #eee;
+}
+
+.clock-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    margin: 5% auto;
+    width: 30%;
+    align-items: center;
+    align-content: center;
+}
+
+.clock-panel form {
+    align-items: center;
+    align-content: center;
+}
+
+.clock {
+    font-size: 40pt;
+    text-align: center;
+}
